@@ -1,0 +1,6 @@
+{
+  "name": "المصرية الدولية لصناعة عبوات الجامبو",
+  "description": "برنامج مبيعات متطوّر لشركة المصرية الدولية لصناعة عبوات الجامبو لإدارة الفواتير والعمليات اليومية والتقارير المالية والأداء.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
