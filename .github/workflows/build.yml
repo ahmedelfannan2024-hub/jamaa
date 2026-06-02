@@ -17,5 +17,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build app
+      - name: Build React
         run: npm run build
+
+      - name: Install Electron
+        run: npm install electron@latest --save-dev
+
+      - name: Package App
+        run: |
+          npx @electron/packager . MyApp --platform=win32 --arch=x64 --out=portable --overwrite
+
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyApp-Windows
+          path: portable/**
