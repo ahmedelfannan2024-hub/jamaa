@@ -1,0 +1,35 @@
+name: Build Windows App
+
+on:
+workflow_dispatch:
+
+jobs:
+build:
+runs-on: windows-latest
+
+```
+steps:
+  - uses: actions/checkout@v4
+
+  - uses: actions/setup-node@v4
+    with:
+      node-version: 22
+
+  - run: npm install
+
+  - run: npm run build
+
+  - run: npm install electron@latest --save-dev
+
+  - run: |
+      echo const {app,BrowserWindow}=require('electron'); > electron.cjs
+      echo function createWindow(){const win=new BrowserWindow({width:1200,height:800});win.loadFile('dist/index.html');} >> electron.cjs
+      echo app.whenReady().then(createWindow); >> electron.cjs
+
+  - run: npx @electron/packager . MyApp --platform=win32 --arch=x64 --out=portable --overwrite
+
+  - uses: actions/upload-artifact@v4
+    with:
+      name: MyApp-Windows
+      path: portable/**
+```
